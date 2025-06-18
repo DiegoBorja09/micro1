@@ -17,5 +17,6 @@ spec:
       containers:
         - name: micro1
           image: diegoborja09/micro1:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
