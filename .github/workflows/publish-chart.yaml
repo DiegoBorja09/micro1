@@ -21,6 +21,11 @@ jobs:
       run: |
         sed -i "s|tag:.*|tag: \"${{ github.sha }}\"|" charts/micro1/values.yaml
 
+    - name: Bump chart version
+      run: |
+        VERSION="0.1.${{ github.run_number }}"
+        sed -i "s/^version:.*/version: ${VERSION}/" charts/micro1/Chart.yaml
+
     - name: Package chart
       run: |
         helm package charts/micro1
