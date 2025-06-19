@@ -3,11 +3,11 @@ entries:
   micro1:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-06-19T03:43:22.659620424Z"
+    created: "2025-06-19T03:51:43.350409511Z"
     description: Microservicio 1 chart
-    digest: 635fb46ab60e41ece5a215a1b9b19bac79c64ab78d816010599a9d67c8204f15
+    digest: b91a8a53f1c632b0496495e64f868e7fbd4fadc0a01d71625d136c9a3020272f
     name: micro1
     urls:
-    - https://diegoborja09.github.io/micro1/micro1-0.1.0.tgz
-    version: 0.1.0
-generated: "2025-06-19T03:43:22.659349199Z"
+    - https://diegoborja09.github.io/micro1/micro1-0.1.6.tgz
+    version: 0.1.6
+generated: "2025-06-19T03:51:43.35014704Z"
