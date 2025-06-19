@@ -17,16 +17,19 @@ jobs:
       with:
         version: 'v3.12.0'
 
-    - name: Update Helm chart image tag
+    - name: Update image tag in values.yaml
       run: |
+        echo "Usando commit SHA: ${{ github.sha }}"
         sed -i "s|tag:.*|tag: \"${{ github.sha }}\"|" charts/micro1/values.yaml
+        cat charts/micro1/values.yaml
 
     - name: Bump chart version
       run: |
         VERSION="0.1.${{ github.run_number }}"
         sed -i "s/^version:.*/version: ${VERSION}/" charts/micro1/Chart.yaml
+        echo "Usando chart version: $VERSION"
 
-    - name: Package chart
+    - name: Package Helm chart
       run: |
         helm package charts/micro1
         mkdir -p repo
@@ -36,6 +39,7 @@ jobs:
       run: |
         cd repo
         helm repo index . --url https://diegoborja09.github.io/micro1/
+        cat index.yaml
 
     - name: Push to gh-pages
       uses: peaceiris/actions-gh-pages@v3
@@ -43,3 +47,4 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./repo
         publish_branch: gh-pages
+
