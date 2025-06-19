@@ -19,9 +19,9 @@ jobs:
 
     - name: Package chart
       run: |
-        helm package charts/micro2
+        helm package charts/micro1
         mkdir -p repo
-        mv micro2-*.tgz repo/
+        mv micro1-*.tgz repo/
 
     - name: Update index.yaml
       run: |
