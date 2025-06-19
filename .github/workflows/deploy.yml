@@ -1,12 +1,16 @@
-name: Build and Deploy Micro1
+name: Build and Push Micro1 Image
 
 on:
   push:
     branches:
       - main
+    paths:
+      - 'src/**'
+      - 'Dockerfile'
+      - '.github/workflows/**'
 
 jobs:
-  build-and-deploy:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,17 +26,7 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Build and push Docker image
+    - name: Build and Push Docker image
       run: |
         docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/micro1:latest .
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/micro1:latest
-
-    - name: Set up Kubeconfig
-      run: |
-        mkdir -p ~/.kube
-        echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 -d > ~/.kube/config
-
-    - name: Deploy to Kubernetes
-      run: |
-        kubectl apply -f app-deployment.yaml
-        kubectl apply -f service1.yaml
